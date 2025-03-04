@@ -36,6 +36,8 @@ const DraggableHospital: React.FC<{
   id: string;
   text: string;
   index: number;
+  onOrderChange: (id: string, newPosition: number) => void;
+  totalItems: number;
 }> = ({ id, text, index }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
@@ -157,6 +159,16 @@ export const HospitalLists: React.FC<ListsProps> = ({ data }) => {
     }
   };
 
+  const handleOrderChange = (id: string, newPosition: number) => {
+    setSelectedHospitals((prev) => {
+      const newOrder = [...prev];
+      const oldPosition = newOrder.indexOf(id);
+      newOrder.splice(oldPosition, 1); // Remove from old position
+      newOrder.splice(newPosition, 0, id); // Insert at new position
+      return newOrder;
+    });
+  };
+
   const buildSearchInput = (isChosen: boolean) => (
     <SearchInput
       value={isChosen ? chosenFilter : availableFilter}
@@ -266,6 +278,8 @@ export const HospitalLists: React.FC<ListsProps> = ({ data }) => {
                         id={id}
                         text={hospital?.text || id}
                         index={index}
+                        onOrderChange={handleOrderChange}
+                        totalItems={selectedHospitals.length}
                       />
                     );
                   })}

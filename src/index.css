@@ -72,3 +72,18 @@ h1 {
   background-color: #cbd5e1;
   border-radius: 3px;
 }
+
+.pf-v5-c-number-input {
+  border: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  color: #1d4ed8 !important;
+}
+
+.pf-v5-c-number-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
